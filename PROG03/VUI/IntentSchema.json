@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "intent": "HelpIntent"
+    },
+    {
+      "intent": "RecipeRetrievalIntent",
+      "slots": [
+        {
+          "name": "food",
+          "type": "AMAZON.Food"
+        }
+      ]
+    },
+    {
+      "intent": "IngredientListingIntent"
+    },
+    {
+      "intent": "NextIngredientIntent"
+    },
+    {
+      "intent": "LastIngredientIntent"
+    },
+    {
+      "intent": "RestartIntent"
+    },
+    {
+      "intent": "ReadRecipeIntent"
+    },
+    {
+      "intent": "NextStepIntent"
+    },
+    {
+      "intent": "LastStepIntent"
+    },
+    {
+      "intent": "ExitIntent"
+    },
+    {
+      "intent": "MainDialogIntent"
+    }
+  ]
+}

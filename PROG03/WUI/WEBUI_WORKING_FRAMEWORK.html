@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    
+var baby; // Global recipe
+function loadababy() {
+            $.get("https://a9bn0531nk.execute-api.us-east-1.amazonaws.com/prod/RecipeUpdate?TableName=Recipes", function(data, status){
+            // alert("Data: " + data + "\nStatus: " + status);
+            baby = data["Items"]; // 0 for first item which is burger
+            var txt1 = "";
+            var sonny = [];
+            for (i = 0; i < baby.length; i++) {
+                txt1 += "<div>" + "<img src =" + baby[i].ImageURL + "><br>" + baby[i].RecipeName + "<br>" + baby[i].Ingredients +"<br>" + baby[i].Directions + "</div>";
+            }
+            ///txt1 += "</ul>";
+            
+            $("#party").append(txt1);     // Append new elements
+            
+            $("#result").text(baby[0].RecipeName);
+            $("#result1").text(baby[0].Ingredients);
+            $("#result2").text(baby[0].Directions);
+            document.getElementById('img1').src=baby[0].ImageURL;
+        });
+}
+function sweetson() {
+var babak1 = document.getElementById('tits').value;
+var lines1 = document.getElementById('myTextarea1').value;
+lines1 = lines1.replace(/\n\r?/g, '<br />');
+var lines2 = document.getElementById('myTextarea2').value;
+lines2 = lines2.replace(/\n\r?/g, '<br />');
+var babak2 = document.getElementById('tits2').value;
+var nuts = '{"TableName": "Recipes", "Item": { "RecipeName":"' + babak1 + '","Ingredients":"' + lines1 + '","Directions":"' + lines2 + '","ImageURL":"' + babak2 + '"}}';
+var sdf = '{"TableName": "Recipes", "Item": {"RecipeName":"Congee", "Ingredients":"Rice, Ginger"}}';
+var sdf2 = '{"TableName": "Recipes", "Item": {"RecipeName":"' + babak1 + '", "Ingredients":"' + lines1 + '", "Directions":"' + lines2 + '", "ImageURL":"' + babak2 + '"}}';
+
+
+var theUrl = "https://a9bn0531nk.execute-api.us-east-1.amazonaws.com/prod/RecipeUpdate?TableName=Recipes";
+        $.ajax({
+          url: 'https://a9bn0531nk.execute-api.us-east-1.amazonaws.com/prod/RecipeUpdate?TableName=Recipes',
+          type: 'POST',
+          data: JSON.stringify(JSON.parse(sdf2)),
+          success: function(data) {
+            alert("POSTed successfully");
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert("Error");
+            }
+        });
+}
+
+
+</script>
+
+
+</head>
+<body onload="loadababy()">
+
+<div class="container">
+  <h2>Recipe Assistant</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show Food</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Add Recipe</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">FOOD STUFF</h4>
+        </div>
+        <div class="modal-body" id = "party">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">Add Recipe</h4>
+        </div>
+        <div class="modal-body">
+          <p><input type="text" id = "tits"> Name</p>
+          <p><textarea id="myTextarea1"></textarea> Ingredients</p>
+          <p><textarea id="myTextarea2"></textarea> Directions</p>
+          <p><input type="text" id = "tits2"> Image URL</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" onclick="sweetson()">Submit</button>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
+</body>
+</html>
+

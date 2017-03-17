@@ -1,0 +1,22 @@
+HelpIntent what can i say
+RecipeRetrievalIntent find {food}
+RecipeRetrievalIntent i'd like to make {food}
+RecipeRetrievalIntent how do I make {food}
+IngredientListingIntent what are the ingredients
+IngredientListingIntent tell me the ingredients
+IngredientListingIntent ingredients
+IngredientListingIntent list the ingredients
+NextIngredientIntent next ingredient
+NextIngredientIntent what is the next ingredient
+LastIngredientIntent last ingredient
+LastIngredientIntent what was the last ingredient
+RestartIntent start again
+RestartIntent start over
+ReadRecipeIntent read recipe
+ReadRecipeIntent what is the recipe
+ReadRecipeIntent start
+NextStepIntent next step
+LastStepIntent last step
+ExitIntent exit
+ExitIntent quit
+MainDialogIntent main dialog
