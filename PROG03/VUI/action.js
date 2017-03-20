@@ -1,17 +1,24 @@
 'use strict';
 var CARD_TITLE = "Recipe Assistant";
 
+var AWS = require("aws-sdk");
+
+AWS.config.update({
+  region: "us-east-1",
+    accessKeyId: "AKIAITL24EXP2MAXOUTA",
+    secretAccessKey: "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"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+var foodItem;
+
+
+
 console.log('Loading function');
 
 const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
-
-//console.log('Loading function');
-
-//const doc = require('dynamodb-doc');
-
-//const dynamo = new doc.DynamoDB();
 
 
 //var recipes_dict = [];
@@ -249,21 +256,26 @@ function handleMain (intent, session, callback) {
         callback(session.attributes,
             buildSpeechletResponseWithoutCard(speechOutput, repromptText, shouldEndSession));
     } else if (intent.name === "RecipeRetrievalIntent") {
-        session.attributes.currentFood = intent.slots.food.value;
-        var tableName = "RecipesDB";
-        var rName = intent.slots.food.value
-        var foodItem;
+        /*var table = "RecipesDB";
 
-        dynamo.getItem({ TableName: tableName, Key: {RecipeName: rName } }, function(err, data) {
-            if (err) {
-                //console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            } else {
-                console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-                foodItem = data;
+        var title = intent.slots.food.value;
+
+        var params = {
+            TableName: table,
+            Key:{
+                "RecipeName": title
             }
-        });
+        };
 
         
+        docClient.get(params, function(err, data) {
+            if (err) {
+                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            } else {
+                foodItem = data;
+                console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+            }
+        });*/
 
 
 
@@ -273,13 +285,13 @@ function handleMain (intent, session, callback) {
 
                 
         // change attributes to current food
-        //var happy = "adfasdf<br/>dafafd<br/>dsafadf<br/>dfafdaf";
+        var happy = "adfasdf<br/>dafafd<br/>dsafadf<br/>dfafdaf";
 
         session.attributes.currentFood = intent.slots.food.value;
-        session.attributes.directions = foodItem.PrepDirections.split("<br/>");
-        session.attributes.ingredients = foodItem.IngredientsList.split("<br/>");
-        //session.attributes.directions = happy.split("<br/>");
-        //session.attributes.ingredients = happy.split("<br/>");
+        //session.attributes.directions = foodItem["PrepDirections"].split("<br/>");
+        //session.attributes.ingredients = foodItem["IngredientsList"].split("<br/>");
+        session.attributes.directions = happy.split("<br/>");
+        session.attributes.ingredients = happy.split("<br/>");
 
         
         
@@ -501,5 +513,4 @@ function buildResponse(sessionAttributes, speechletResponse) {
     };
 }
  
-
 
