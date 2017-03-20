@@ -1,75 +1,109 @@
-/* WE NEED TO GET THE DYNAMODB TO WORK WITH THIS CODE <-- FINISHED... need to check and print
-/* Once we do this, we can simply use the following syntax:
-/* recipeItem = dynamoDatabase["name of food"]
-/* food = recipeItem.name
-/* ingredients = recipeItem.ingredients
-/* directions = recipeItem.directions
-/* image = recipeItem.image */
- 
- 
- 
- 
 'use strict';
- 
 var CARD_TITLE = "Recipe Assistant";
- 
- 
- 
-// Start of file, global scope.
- 
-//const rp = require('request-promise');
- 
- // FOR NOW WE REPLACE THIS WITH A PREMADE LIST
- 
-//const recipes_dict = []; // <-this is the most important thing
 
-var great = new Object();
-great.RecipeName = "burger";
-great.Ingredients = ["happy", "yeah", "suweet"];
-great.Directions = ["baby", "what", "donkey"];
+console.log('Loading function');
+
+const doc = require('dynamodb-doc');
+
+const dynamo = new doc.DynamoDB();
+
+//console.log('Loading function');
+
+//const doc = require('dynamodb-doc');
+
+//const dynamo = new doc.DynamoDB();
 
 
- 
-// Route the incoming request based on type (LaunchRequest, IntentRequest,
-// etc.) The JSON body of the request is provided in the event parameter.
-exports.handler = function (event, context) {
-    try {
-        console.log("event.session.application.applicationId=" + event.session.application.applicationId);
- 
-        /**
-         * Uncomment this if statement and populate with your skill's application ID to
-         * prevent someone else from configuring a skill that sends requests to this function.
-         */
- 
-//     if (event.session.application.applicationId !== "amzn1.echo-sdk-ams.app.05aecccb3-1461-48fb-a008-822ddrt6b516") {
-//         context.fail("Invalid Application ID");
-//      }
- 
-        if (event.session.new) {
-            onSessionStarted({requestId: event.request.requestId}, event.session);
+//var recipes_dict = [];
+
+/**
+ * Demonstrates a simple HTTP endpoint using API Gateway. You have full
+ * access to the request and response payload, including headers and
+ * status code.
+ *
+ * To scan a DynamoDB table, make a GET request with the TableName as a
+ * query string parameter. To put, update, or delete an item, make a POST,
+ * PUT, or DELETE request respectively, passing in the payload to the
+ * DynamoDB API as a JSON body.
+ */
+exports.handler = (event, context, callback) => {
+    //console.log('Received event:', JSON.stringify(event, null, 2));
+    
+    
+    
+    if (event.httpMethod) {
+    
+        const done = (err, res) => callback(null, {
+            statusCode: err ? '400' : '200',
+            body: err ? err.message : JSON.stringify(res),
+            headers: {
+                'Content-Type': 'application/json', 'Access-Control-Allow-Headers': 'x-requested-with',
+                "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true,
+            },
+        });
+    
+        switch (event.httpMethod) {
+            case 'DELETE':
+                dynamo.deleteItem(JSON.parse(event.body), done);
+                break;
+            case 'GET':
+                dynamo.scan({ TableName: event.queryStringParameters.TableName }, done);
+                break;
+            case 'POST':
+                dynamo.putItem(JSON.parse(event.body), done);
+                break;
+            case 'PUT':
+                dynamo.updateItem(JSON.parse(event.body), done);
+                break;
+            default:
+                done(new Error(`Unsupported method "${event.httpMethod}"`));
         }
- 
-        if (event.request.type === "LaunchRequest") {
-            onLaunch(event.request,
-                event.session,
-                function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        } else if (event.request.type === "IntentRequest") {
-            onIntent(event.request,
-                event.session,
-                function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                });
-        } else if (event.request.type === "SessionEndedRequest") {
-            onSessionEnded(event.request, event.session);
-            context.succeed();
-        }
-    } catch (e) {
-        context.fail("Exception: " + e);
     }
+    else
+    {
+    
+        
+        try {
+            console.log("event.session.application.applicationId=" + event.session.application.applicationId);
+            
+            
+     
+            if (event.request.type === "LaunchRequest") {
+                onLaunch(event.request,
+                    event.session,
+                    function callback(sessionAttributes, speechletResponse) {
+                        context.succeed(buildResponse(sessionAttributes, speechletResponse));
+                    });
+            } else if (event.request.type === "IntentRequest") {
+                onIntent(event.request,
+                    event.session,
+                    function callback(sessionAttributes, speechletResponse) {
+                        context.succeed(buildResponse(sessionAttributes, speechletResponse));
+                    });
+            } else if (event.request.type === "SessionEndedRequest") {
+                onSessionEnded(event.request, event.session);
+                context.succeed();
+            }
+                
+            
+            
+            /**
+             * Uncomment this if statement and populate with your skill's application ID to
+             * prevent someone else from configuring a skill that sends requests to this function.
+             */
+     
+            //if (event.session.application.applicationId !== "amzn1.ask.skill.1e580a0f-5e4f-4ef3-978f-9591acf6cd0f") {
+            //     context.fail("Invalid Application ID");
+            //}
+     
+            
+        } catch (e) {
+            context.fail("Exception: " + e);
+        }
+    }
+    
 };
- 
+
 /**
  * Called when the session starts.
  */
@@ -86,9 +120,9 @@ function onSessionStarted(sessionStartedRequest, session) {
 function onLaunch(launchRequest, session, callback) {
     console.log("onLaunch requestId=" + launchRequest.requestId
         + ", sessionId=" + session.sessionId);
- 
- 
-   getWelcomeResponse(callback);
+    
+    
+    getWelcomeResponse(callback);
 }
 
 /**
@@ -215,20 +249,42 @@ function handleMain (intent, session, callback) {
         callback(session.attributes,
             buildSpeechletResponseWithoutCard(speechOutput, repromptText, shouldEndSession));
     } else if (intent.name === "RecipeRetrievalIntent") {
+        session.attributes.currentFood = intent.slots.food.value;
+        var tableName = "RecipesDB";
+        var rName = intent.slots.food.value
+        var foodItem;
+
+        dynamo.getItem({ TableName: tableName, Key: {RecipeName: rName } }, function(err, data) {
+            if (err) {
+                //console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            } else {
+                console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+                foodItem = data;
+            }
+        });
+
         
+
+
 
         // change dialog to ingredients dialog
+
         session.attributes.currentDialog = "ingredients";
-        
+
+                
         // change attributes to current food
-        session.attributes.currentFood = great.RecipeName;
-        session.attributes.directions = great.Directions; // TODO: this needs an extra step for changing one string to a list.... is there an easy way? ingredients are separated by /n
-        session.attributes.ingredients = great.Ingredients; // TODO: this needs an extra step for changing one string to a list.... is there an easy way?
+        //var happy = "adfasdf<br/>dafafd<br/>dsafadf<br/>dfafdaf";
+
+        session.attributes.currentFood = intent.slots.food.value;
+        session.attributes.directions = foodItem.PrepDirections.split("<br/>");
+        session.attributes.ingredients = foodItem.IngredientsList.split("<br/>");
+        //session.attributes.directions = happy.split("<br/>");
+        //session.attributes.ingredients = happy.split("<br/>");
 
         
         
         
-        var speechOutput = "You selected " +great.RecipeName+ ". To hear ingredients, say ingredients or what are the ingredients.";
+        var speechOutput = "You selected " + session.attributes.currentFood + ". To hear ingredients, say ingredients or what are the ingredients.";
         var repromptText = "To hear ingredients, say ingredients or what are the ingredients.";
         var shouldEndSession = false;
         callback(session.attributes,
@@ -445,6 +501,5 @@ function buildResponse(sessionAttributes, speechletResponse) {
     };
 }
  
-
 
 
