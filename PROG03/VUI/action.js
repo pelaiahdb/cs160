@@ -100,7 +100,7 @@ exports.handler = (event, context, callback) => {
                             context.succeed(buildResponse(sessionAttributes, speechletResponse));
                         });
                 } else if (event.request.type === "IntentRequest") {
-                    onIntent(event.request,
+                    onIntent(data, event.request,
                         event.session,
                         function callback(sessionAttributes, speechletResponse) {
                             context.succeed(buildResponse(sessionAttributes, speechletResponse));
@@ -151,13 +151,14 @@ function onLaunch(data, launchRequest, session, callback) {
 /**
  * Called when the user specifies an intent for this skill.
  */
-function onIntent(intentRequest, session, callback) {
+function onIntent(data, intentRequest, session, callback) {
     console.log("onIntent requestId=" + intentRequest.requestId
         + ", sessionId=" + session.sessionId);
  
     var intent = intentRequest.intent,
         intentName = intentRequest.intent.name;
- 
+    
+    session.attributes.superTable = data["Items"];
 
 
 
@@ -281,10 +282,11 @@ function handleMain (intent, session, callback) {
         // we use for loop to go through every item and check if it's there
         var foodItem;
         var foundYou = false;
-        for(var i in session.attributes.superTable) {
-            i = session.attributes.superTable["i"];
-            if (i.RecipeName.toLowerCase() === intent.slots.food.value.toLowerCase()) {
-                foodItem = i;
+        for(var i = 0; i < session.attributes.superTable.length; i++) {
+            var temp = session.attributes.superTable[i];
+            if (temp.RecipeName.toLowerCase() === intent.slots.food.value.toLowerCase()) {
+                foodItem = temp;
+                foundYou = true;
                 break;
             }
         }
