@@ -251,7 +251,7 @@ function handleMain (intent, session, callback) {
     } else if (intent.name === "RecipeRetrievalIntent") {
         session.attributes.currentFood = intent.slots.food.value;
         var tableName = "RecipesDB";
-        var rName = intent.slots.food.value
+        var rName = intent.slots.food.value;
         var foodItem;
 
         dynamo.getItem({ TableName: tableName, Key: {RecipeName: rName } }, function(err, data) {
