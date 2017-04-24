@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\monsgoblin\.android\build-cache\ac02268735f7fce07ddf62308974949091bd5972\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2f7636502e5c51b9211a8d3317e128853bd528da\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_2bc0ae105c30b8e85ebb633aaef3ce3ccf308733\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\monsgoblin\.android\build-cache\78a140d74313baaf9fda70808825ccae92956857\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d6d244a3ecbd710769ffc703ab893310accd160e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\monsgoblin\.android\build-cache\a136ffa28e033f0ab857fbf223df4f5f8e61838f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_141156c306baf3d323aa2d1c2c9abbc42262243b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="859fec79456e1b797d6c59bc7495739141613ca4">
+        <dex dex="C:\Users\monsgoblin\Desktop\baby\android-samples-master\FINALPROJECT\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c51ea3eb5b5d3c24c2a33e1df4349964bbe98928\classes.dex" />
+    </item>
+
+</items>

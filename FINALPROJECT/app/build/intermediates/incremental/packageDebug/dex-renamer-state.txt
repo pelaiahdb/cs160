@@ -1,0 +1,7 @@
+#Sun Apr 23 13:26:41 PDT 2017
+base.0=C\:\\Users\\monsgoblin\\Desktop\\baby\\android-samples-master\\FINALPROJECT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_2bc0ae105c30b8e85ebb633aaef3ce3ccf308733
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\monsgoblin\\Desktop\\baby\\android-samples-master\\FINALPROJECT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_c51ea3eb5b5d3c24c2a33e1df4349964bbe98928\\classes.dex
+base.1=C\:\\Users\\monsgoblin\\Desktop\\baby\\android-samples-master\\FINALPROJECT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_c51ea3eb5b5d3c24c2a33e1df4349964bbe98928
+file.0=C\:\\Users\\monsgoblin\\Desktop\\baby\\android-samples-master\\FINALPROJECT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_2bc0ae105c30b8e85ebb633aaef3ce3ccf308733\\classes.dex

@@ -1,5 +1,4 @@
 'use strict';
-var CARD_TITLE = "Recipe Assistant";
 
 var AWS = require("aws-sdk");
 
@@ -14,7 +13,17 @@ var foodItem;
 
 
 
+<<<<<<< HEAD
 console.log('Loading function');
+=======
+const AWS = require('aws-sdk');
+
+const docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
+
+var CARD_TITLE = "Recipe Assistant";
+
+//console.log('Loading function');
+>>>>>>> 5a32f8241e4daa2dcbc6274318abc84549fc5c00
 
 const doc = require('dynamodb-doc');
 
@@ -69,46 +78,64 @@ exports.handler = (event, context, callback) => {
     else
     {
     
-        
-        try {
-            console.log("event.session.application.applicationId=" + event.session.application.applicationId);
-            
-            
-     
-            if (event.request.type === "LaunchRequest") {
-                onLaunch(event.request,
-                    event.session,
-                    function callback(sessionAttributes, speechletResponse) {
-                        context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                    });
-            } else if (event.request.type === "IntentRequest") {
-                onIntent(event.request,
-                    event.session,
-                    function callback(sessionAttributes, speechletResponse) {
-                        context.succeed(buildResponse(sessionAttributes, speechletResponse));
-                    });
-            } else if (event.request.type === "SessionEndedRequest") {
-                onSessionEnded(event.request, event.session);
-                context.succeed();
-            }
-                
-            
-            
-            /**
-             * Uncomment this if statement and populate with your skill's application ID to
-             * prevent someone else from configuring a skill that sends requests to this function.
-             */
-     
-            //if (event.session.application.applicationId !== "amzn1.ask.skill.1e580a0f-5e4f-4ef3-978f-9591acf6cd0f") {
-            //     context.fail("Invalid Application ID");
-            //}
-     
-            
-        } catch (e) {
-            context.fail("Exception: " + e);
-        }
-    }
     
+
+    var params = {
+
+
+        TableName: 'RecipesDB'
+
+    }
+
+    
+
+    docClient.scan(params, function(err, data) {
+
+        if(err) {
+
+            callback(err, null);
+
+        } else {
+            try {
+
+                console.log("event.session.application.applicationId=" + event.session.application.applicationId);
+                
+                
+                // how do we pass data?
+                // basically, we send the event request and event session to OnLaunch, OnIntent (ignore OnSessionEnded)
+                
+                if (event.request.type === "LaunchRequest") {
+                    onLaunch(data, event.request,
+                        event.session,
+                        function callback(sessionAttributes, speechletResponse) {
+                            context.succeed(buildResponse(sessionAttributes, speechletResponse));
+                        });
+                } else if (event.request.type === "IntentRequest") {
+                    onIntent(data, event.request,
+                        event.session,
+                        function callback(sessionAttributes, speechletResponse) {
+                            context.succeed(buildResponse(sessionAttributes, speechletResponse));
+                        });
+                        
+                        // IGNORE BELOW JUST FOCUS ON onLaunch and onIntent
+                } else if (event.request.type === "SessionEndedRequest") {
+                    onSessionEnded(event.request, event.session);
+                    context.succeed();
+                }
+                
+            } catch (e) {
+                context.fail("Exception: " + e);
+            }
+
+
+            // callback(null, data);
+
+        }
+
+    })
+    }
+
+        
 };
 
 /**
@@ -124,24 +151,25 @@ function onSessionStarted(sessionStartedRequest, session) {
 /**
  * Called when the user invokes the skill without specifying what they want.
  */
-function onLaunch(launchRequest, session, callback) {
+function onLaunch(data, launchRequest, session, callback) {
     console.log("onLaunch requestId=" + launchRequest.requestId
         + ", sessionId=" + session.sessionId);
     
     
-    getWelcomeResponse(callback);
+    getWelcomeResponse(data, callback);
 }
 
 /**
  * Called when the user specifies an intent for this skill.
  */
-function onIntent(intentRequest, session, callback) {
+function onIntent(data, intentRequest, session, callback) {
     console.log("onIntent requestId=" + intentRequest.requestId
         + ", sessionId=" + session.sessionId);
  
     var intent = intentRequest.intent,
         intentName = intentRequest.intent.name;
- 
+    
+    session.attributes.superTable = data["Items"];
 
 
 
@@ -213,12 +241,16 @@ function onSessionEnded(sessionEndedRequest, session) {
  
  
 
-function getWelcomeResponse(callback) {
+function getWelcomeResponse(data, callback) {
     var sessionAttributes = {};
     var speechOutput = "Recipe assistant, what recipe would you like to make?";
     var shouldEndSession = false;
     var repromptText = "What recipe would you like to make?";
-   sessionAttributes = {
+
+       sessionAttributes = {
+
+        "superTable": data["Items"],
+
         "speechOutput": speechOutput,
         "repromptText": repromptText,
         "waitingForOption": true,
@@ -256,6 +288,7 @@ function handleMain (intent, session, callback) {
         callback(session.attributes,
             buildSpeechletResponseWithoutCard(speechOutput, repromptText, shouldEndSession));
     } else if (intent.name === "RecipeRetrievalIntent") {
+<<<<<<< HEAD
         /*var table = "RecipesDB";
 
         var title = intent.slots.food.value;
@@ -276,6 +309,28 @@ function handleMain (intent, session, callback) {
                 console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
             }
         });*/
+=======
+        
+        // since we have the Recipe table as a session attribute
+        // we use for loop to go through every item and check if it's there
+        var foodItem;
+        var foundYou = false;
+        for(var i = 0; i < session.attributes.superTable.length; i++) {
+            var temp = session.attributes.superTable[i];
+            if (temp.RecipeName.toLowerCase() === intent.slots.food.value.toLowerCase()) {
+                foodItem = temp;
+                foundYou = true;
+                break;
+            }
+        }
+        if (!foundYou) {
+            var speechOutput = "Food not found. Please look for another food.";
+            var repromptText = "Food not found. Please look for another food.";
+            var shouldEndSession = false;
+            callback(session.attributes,
+                buildSpeechletResponseWithoutCard(speechOutput, repromptText, shouldEndSession));
+        }
+>>>>>>> 5a32f8241e4daa2dcbc6274318abc84549fc5c00
 
 
 
@@ -283,15 +338,22 @@ function handleMain (intent, session, callback) {
 
         session.attributes.currentDialog = "ingredients";
 
-                
         // change attributes to current food
         var happy = "adfasdf<br/>dafafd<br/>dsafadf<br/>dfafdaf";
 
+<<<<<<< HEAD
         session.attributes.currentFood = intent.slots.food.value;
         //session.attributes.directions = foodItem["PrepDirections"].split("<br/>");
         //session.attributes.ingredients = foodItem["IngredientsList"].split("<br/>");
         session.attributes.directions = happy.split("<br/>");
         session.attributes.ingredients = happy.split("<br/>");
+=======
+        session.attributes.currentFood = foodItem["RecipeName"];
+        session.attributes.directions = foodItem["PrepDirections"].split("<br/>");
+        session.attributes.ingredients = foodItem["IngredientsList"].split("<br/>");
+        //session.attributes.directions = happy.split("<br/>");
+        //session.attributes.ingredients = happy.split("<br/>");
+>>>>>>> 5a32f8241e4daa2dcbc6274318abc84549fc5c00
 
         
         
@@ -504,7 +566,7 @@ function buildSpeechletResponseWithoutCard(output, repromptText, shouldEndSessio
         shouldEndSession: shouldEndSession
     };
 }
- 
+
 function buildResponse(sessionAttributes, speechletResponse) {
     return {
         version: "1.0",
@@ -512,5 +574,8 @@ function buildResponse(sessionAttributes, speechletResponse) {
         response: speechletResponse
     };
 }
+<<<<<<< HEAD
  
 
+=======
+>>>>>>> 5a32f8241e4daa2dcbc6274318abc84549fc5c00
