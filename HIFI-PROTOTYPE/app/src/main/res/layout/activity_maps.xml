@@ -7,14 +7,70 @@
     android:layout_height="match_parent"
     tools:context="com.example.monsgoblin.hifi_prototype.MapsActivity">
 
-<Button
-    android:id="@+id/button1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="right|top"
-    android:text="Demo Button"
-    android:padding="10dp"
-    android:layout_marginTop="20dp"
-    android:paddingRight="10dp"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="VISIBLE TO ALL"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft ="20dp"
+        android:color="#6600ffe5"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="ALL GENDERS"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft ="150dp"
+        android:color="#66f200ff"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="ALL DIRECTIONS"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft ="270dp"
+        android:color="#66ffb700"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="REQUEST GROUP"
+        android:padding="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft ="20dp"
+        android:color="#6600ff62"/>
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="SCHEDULE GROUP"
+        android:padding="10dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft ="20dp"
+        android:color="#669000ff"/>
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="REPORT ALERT"
+        android:padding="10dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft ="20dp"
+        android:color="#66ff0000"/>
 
 </fragment>

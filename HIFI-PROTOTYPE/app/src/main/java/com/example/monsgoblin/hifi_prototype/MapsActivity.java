@@ -1,5 +1,6 @@
 package com.example.monsgoblin.hifi_prototype;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -35,7 +36,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        Button onlyButton = (Button) findViewById(button1);
+        Button onlyButton1 = (Button) findViewById(button1);
+        Button onlyButton2 = (Button) findViewById(button2);
     }
 
 
@@ -62,10 +64,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker for You and move the camera
 
         LatLng myLocation = new LatLng(37.870352, -122.259724);
-        mMap.addMarker(new MarkerOptions().position(myLocation).title("You"));
+        meYou = mMap.addMarker(new MarkerOptions().position(myLocation).title("You"));
+        meYou.showInfoWindow();
 
         Random mizer = new Random();
         int rainbows = 100;
+
         for (int i = 0; i < rainbows; i++) {
             int gender = mizer.nextInt(21);
             float angle = 360*mizer.nextFloat();
@@ -73,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Marker tempFake = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(37.870352 + mizer.nextInt(20 + 1)*.0001*(mizer.nextBoolean() ? -1 : 1), -122.259724 + mizer.nextInt(20 + 1)*.0001*(mizer.nextBoolean() ? -1 : 1)))
                     .title("TO: Somewhere")
-                    .icon(BitmapDescriptorFactory.defaultMarker(i * 360 / rainbows))
+                    .icon(BitmapDescriptorFactory.defaultMarker(angle))
                     .snippet("Hi nice to meet u"));
             MarkerWrapper fakeWrapper = new MarkerWrapper();
             fakeWrapper.temp = tempFake;
@@ -85,7 +89,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 fakeWrapper.gender = "male";
             fakes.add(fakeWrapper);
             tempFake.setRotation(angle);
+
         }
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
     }
