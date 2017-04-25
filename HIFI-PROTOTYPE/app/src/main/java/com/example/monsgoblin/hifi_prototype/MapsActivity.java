@@ -46,6 +46,8 @@ import com.skyfishjy.library.RippleBackground;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.R.id.*;
 
@@ -233,12 +235,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         baby.getShowsDialog();
 */
 
+        //new Thread(p).start();
+
+        final Handler h = new Handler();
+        final int delay = 100; //milliseconds
+
+        h.postDelayed(new Runnable(){
+            public void run(){
+                //do something
+                Random mizer = new Random();
+                for (int i = 0; i < fakes.size(); i++) {
+                    LatLng temp = (LatLng) fakes.get(i).temp.getPosition();
+                    LatLng temp2 = new LatLng(temp.latitude+.00001*(mizer.nextBoolean() ? -1 : 1), temp.longitude+.00001*(mizer.nextBoolean() ? -1 : 1));
+                    fakes.get(i).temp.setPosition(temp2);
+                }
+                h.postDelayed(this, delay);
+            }
+        }, delay);
+
+
     }
 
     public class MarkerWrapper {
         public Marker temp;
         public String gender;
     }
+
 
 /*
     public static class LoginDialogFragment extends DialogFragment {

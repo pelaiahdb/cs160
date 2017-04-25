@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <ImageView
         android:id="@+id/title"
         android:src="@drawable/groupicon"
         android:layout_width="match_parent"
