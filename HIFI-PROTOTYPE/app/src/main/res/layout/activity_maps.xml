@@ -73,4 +73,29 @@
         android:layout_marginLeft ="20dp"
         android:color="#66ff0000"/>
 
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="WATCH OVER ME"
+        android:padding="10dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft ="20dp"
+        android:color="#66ff0000"/>
+
+    <com.skyfishjy.library.RippleBackground
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content"
+        app:rb_color="#0099CC"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="4"
+        app:rb_duration="3000"
+        app:rb_scale="6"
+        app:rb_type="fillRipple">
+    </com.skyfishjy.library.RippleBackground>
+
 </fragment>

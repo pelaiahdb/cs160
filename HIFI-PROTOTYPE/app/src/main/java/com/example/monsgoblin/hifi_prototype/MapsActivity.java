@@ -1,6 +1,10 @@
 package com.example.monsgoblin.hifi_prototype;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.skyfishjy.library.RippleBackground;
 
 import java.util.Random;
 import java.util.ArrayList;
@@ -64,6 +69,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker for You and move the camera
 
         LatLng myLocation = new LatLng(37.870352, -122.259724);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
+        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
+        rippleBackground.startRippleAnimation();
         meYou = mMap.addMarker(new MarkerOptions().position(myLocation).title("You"));
         meYou.showInfoWindow();
 
@@ -93,11 +101,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
+
+
     }
 
     public class MarkerWrapper {
         public Marker temp;
         public String gender;
     }
+/*
+    public class FireMissilesDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.dialog_fire_missiles)
+                    .setPositiveButton(R.string.fire, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+*/
 }
