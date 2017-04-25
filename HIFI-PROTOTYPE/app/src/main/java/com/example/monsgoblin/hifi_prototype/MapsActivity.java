@@ -67,56 +67,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        alertDialog.setView(inflater.inflate(R.layout.custom, null));
 
-        // Create Object of Dialog class
-        final Dialog login = new Dialog(this);
-        // Set GUI of login screen
-        login.setContentView(R.layout.custom);
-        login.setTitle("Cal@SecureCommunity");
-
-        // Init button of login GUI
-        Button btnLogin = (Button) login.findViewById(R.id.btnLogin);
-        Button btnCancel = (Button) login.findViewById(R.id.btnCancel);
-        final EditText txtUsername = (EditText)login.findViewById(R.id.txtUsername);
-        final EditText txtPassword = (EditText)login.findViewById(R.id.txtPassword);
-
-        // Attached listener for login GUI button
-        btnLogin.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(txtUsername.getText().toString().trim().length() > 0 && txtPassword.getText().toString().trim().length() > 0)
-                {
-                    // Validate Your login credential here than display message
-                    Toast.makeText(MapsActivity.this,
-                            "Login Sucessfull", Toast.LENGTH_LONG).show();
-
-                    // Redirect to dashboard / home screen.
-                    login.dismiss();
-                }
-                else
-                {
-                    Toast.makeText(MapsActivity.this,
-                            "Please enter Username and Password", Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
-        btnCancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login.dismiss();
+/* When positive (yes/ok) is clicked */
+        alertDialog.setPositiveButton("SIGN IN", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                dialog.cancel(); // Your custom code
             }
         });
 
-        // Make dialog box visible.
-        login.show();
+/* When negative (No/cancel) button is clicked*/
+        alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish(); // Your custom code
+            }
+        });
+        alertDialog.show();
 
-        login.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 
         final Dialog haha = new Dialog(this);
         // Set GUI of login screen
-        login.setTitle("Cal@SecureCommunity");
 
 
 
