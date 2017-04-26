@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\b51cc8c6c42778767f1692896780f22df8a69ebe\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6003d64df88a6ce5e961fa2bad7f1b9b97689ac1">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e87d348e0d4cb01f50998af5ed421ec9b43ae8b2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\56881bc6f9f75ee7d0d3b53b1426397117f0fb79\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b4eb7830dd00d77edc5eb5712eef3b62d2831acf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_814ecdec1ebe0c163d7a8a615b81a70c80b27b3b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\a473fc189726ba0ec93e8aa4ad3b94ded4429f9b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d16f02a06550523055982820e80a804fd6f1ae42\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_618558af130926fbdc6d98b711472386cdf01137\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\fd00933f7f46e98d9e09b69e07c61a19057f75e9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8d621d167f825852d7cdfc3450039129000146c8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\4abf2703bbd355e56764de02737fddc19ee449ce\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_88b63c1fc73cc0705894c7e930e19d7a0d48863f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\bdec8664381a4d23ae139d62d63baf3859408646\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e9c407afb7a5a0d1ff8ba9023bc5b610b04a2299\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\7a2eddb035e02d21de8dff19ea3c4fe252e19607\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="19696dc358ac668e341f28c41e3387d61ccdb81d">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e737489010ce6176fce008f3fbfb03f7747d7396\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\e4edbcc2fc4393d06fae7e080cc4f46a4014a7e4\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_09286375deba998ea0d86c40cec82356ce2ec5fd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\9f7fa7c7fe2aece952971cccc1892ac7252e1212\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_497b4a16fbaf000a70c7a6b91a9d1b4a9fe80210\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\ea6903c927070496861c57f66e4a949330740076\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_82624084a3be3af15198a537445f6d379bb8df35\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\b62ac66bfd501cb4770d833d7663d705e919c71a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d792bb396b182d4bd96a637d9495e809b81be3fa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\fdfb0d05c7646135af914424e15529be5a3d9daf\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bdcc2a9572f18b8c90a3a157cab6cdfc97c6c736">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ddf92efeb1ef27ec3637aa247b9e6c3ae2d3cae8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\17b21c5672d51051daaa1c914f9b5cd4551927cb\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c7626a9aa507bbbdc16188bc9a9f9bf3370c1ddd">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b5640851c5938a5af287e87019f3de014f46dc69\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\.android\build-cache\26756ea08b4fd0b716e5cc858d048391eeada51e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5a7cf2a41aedccc427107ebb37762a5e2f5be590">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0825c8c6758304b57894019cd47ed0be58f332b9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5943f8d4ce27cda24e5d9fa1c3f6620b52122768">
+        <dex dex="C:\Users\Pashalik\Desktop\uck\HIFI-PROTOTYPE\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_7872531e483deee24e7628d8f84c1a8d80f49c8d\classes.dex" />
+    </item>
+
+</items>

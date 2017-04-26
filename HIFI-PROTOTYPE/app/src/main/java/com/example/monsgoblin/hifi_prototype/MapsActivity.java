@@ -21,6 +21,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,14 +51,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.R.id.*;
+import static com.example.monsgoblin.hifi_prototype.R.id.map;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     private Marker meYou;
     private ArrayList<MarkerWrapper> fakes;
-    private int b1state = 0;
+    private boolean b1state = false;
     private boolean b2state = false;
+    private boolean b3state = false;
+    private LatLng myLocation = new LatLng(37.870352, -122.259724);
+    private boolean b4state = false;
+    private boolean b5state = false;
+    private boolean b7state = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(map);
         mapFragment.getMapAsync(this);
 
 
@@ -76,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 /* When positive (yes/ok) is clicked */
         alertDialog.setPositiveButton("SIGN IN", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                dialog.cancel(); // Your custom code
+                askDest(); // Your custom code
             }
         });
 
@@ -90,31 +98,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
+
         final Dialog haha = new Dialog(this);
         // Set GUI of login screen
 
 
 
 
-        final Button jbutton1 = (Button) findViewById(R.id.button1);
-        final Button jbutton2 = (Button) findViewById(R.id.button2);
-        Button jbutton3 = (Button) findViewById(R.id.button3);
-        Button jbutton4 = (Button) findViewById(R.id.button4);
-        Button jbutton5 = (Button) findViewById(R.id.button5);
-        Button jbutton6 = (Button) findViewById(R.id.button6);
-        Button jbutton7 = (Button) findViewById(R.id.button7);
+        final ImageView jbutton1 = (ImageView) findViewById(R.id.button1);
+        final ImageView jbutton2 = (ImageView) findViewById(R.id.button2);
+        final ImageView jbutton3 = (ImageView) findViewById(R.id.button3);
+        ImageView jbutton4 = (ImageView) findViewById(R.id.button4);
+        ImageView jbutton5 = (ImageView) findViewById(R.id.button5);
+        ImageView jbutton6 = (ImageView) findViewById(R.id.button6);
+        ImageView jbutton7 = (ImageView) findViewById(R.id.button7);
 
 //vis
         jbutton1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                b1state = (b1state+1)%3;
-                if (b1state == 1)
-                    jbutton1.setText("INVISIBLE TO ALL");
-                else if (b1state == 2)
-                    jbutton1.setText("VISIBLE TO SAME GENDER");
+                b1state = !b1state;
+                if(b1state)
+                    jbutton1.setImageResource(R.drawable.invtoall);
                 else
-                    jbutton1.setText("VISIBLE TO ALL");
+                    jbutton1.setImageResource(R.drawable.vistoall);
             }
         });
         //gen
@@ -122,16 +130,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 b2state = !b2state;
-                for (int i = 0; i < fakes.size(); i++) {
-                    if (b2state) {
+                if(b2state) {
+                    jbutton2.setImageResource(R.drawable.samegen);
+                    for (int i = 0; i < fakes.size(); i++) {
                         if (!fakes.get(i).gender.equals("female"))
                             fakes.get(i).temp.setVisible(false);
-                        jbutton2.setText("SAME GENDER");
                     }
-                    else {
+                }
+                else {
+                    jbutton2.setImageResource(R.drawable.allgen);
+                    for (int i = 0; i < fakes.size(); i++) {
                         if (!fakes.get(i).gender.equals("female"))
                             fakes.get(i).temp.setVisible(true);
-                        jbutton2.setText("ALL GENDERS");
                     }
                 }
             }
@@ -140,21 +150,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         jbutton3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                haha.show();
+                b3state = !b3state;
+                if(b3state) {
+                    jbutton3.setImageResource(R.drawable.samedir);
+                    for (int i = 0; i < fakes.size(); i++) {
+                        fakes.get(i).temp.setVisible(false);
+                    }
+                }
+
+                else {
+                    jbutton3.setImageResource(R.drawable.showall);
+                    for (int i = 0; i < fakes.size(); i++) {
+                        fakes.get(i).temp.setVisible(true);
+                    }
+                }
             }
         });
-        //req
         jbutton4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                haha.show();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
+                b4state = !b4state;
+                final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content1);
+                if(b4state) {
+                    rippleBackground.startRippleAnimation();
+                }
+                else
+                    rippleBackground.stopRippleAnimation();
             }
         });
         //sched
         jbutton5.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                haha.show();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
+                b4state = !b4state;
+                final RippleBackground rippleBackground1=(RippleBackground)findViewById(R.id.content2);
+                if(b4state) {
+                    rippleBackground1.startRippleAnimation();
+                }
+                else
+                    rippleBackground1.stopRippleAnimation();
             }
         });
 
@@ -162,18 +198,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         jbutton6.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                haha.show();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
+                b4state = !b4state;
+                final RippleBackground rippleBackground2=(RippleBackground)findViewById(R.id.content3);
+                if(b4state) {
+                    rippleBackground2.startRippleAnimation();
+                    askAlert();
+                }
+                else
+                    rippleBackground2.stopRippleAnimation();
             }
         });
         //watch
         jbutton7.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                haha.show();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
+                b4state = !b4state;
+                final RippleBackground rippleBackground3=(RippleBackground)findViewById(R.id.content4);
+                if(b4state) {
+                    rippleBackground3.startRippleAnimation();
+                }
+                else
+                    rippleBackground3.stopRippleAnimation();
             }
         });
 
 
+    }
+
+    public void askDest() {
+        AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(this);
+        LayoutInflater inflater2 = this.getLayoutInflater();
+        alertDialog2.setView(inflater2.inflate(R.layout.custom2, null));
+
+/* When positive (yes/ok) is clicked */
+        alertDialog2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                dialog.cancel(); // Your custom code
+            }
+        });
+
+/* When negative (No/cancel) button is clicked*/
+        alertDialog2.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel(); // Your custom code
+            }
+        });
+        alertDialog2.show();
+    }
+
+    public void askAlert() {
+        AlertDialog.Builder alertDialog3 = new AlertDialog.Builder(this);
+        LayoutInflater inflater3 = this.getLayoutInflater();
+        alertDialog3.setView(inflater3.inflate(R.layout.custom3, null));
+
+/* When positive (yes/ok) is clicked */
+        alertDialog3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                dialog.cancel(); // Your custom code
+            }
+        });
+
+/* When negative (No/cancel) button is clicked*/
+        alertDialog3.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel(); // Your custom code
+            }
+        });
+        alertDialog3.show();
     }
 
 
@@ -198,12 +291,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMapStyle(style);
 
         // Add a marker for You and move the camera
-
-        LatLng myLocation = new LatLng(37.870352, -122.259724);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.5f));
-        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
-        rippleBackground.startRippleAnimation();
-        meYou = mMap.addMarker(new MarkerOptions().position(myLocation).title("You"));
+        meYou = mMap.addMarker(new MarkerOptions()
+
+                    .position(myLocation).title("You")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.meyou)));
         meYou.showInfoWindow();
 
         Random mizer = new Random();
@@ -230,6 +322,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             tempFake.setRotation(angle);
 
         }
+        mMap.setOnMapLongClickListener(this);
         /*
         LoginDialogFragment baby = new LoginDialogFragment();
         baby.getShowsDialog();
@@ -259,6 +352,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public class MarkerWrapper {
         public Marker temp;
         public String gender;
+    }
+
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+        mMap.addMarker(new MarkerOptions()
+                .position(point)
+                .title("Alert")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.genericalert)));
+        askAlert();
     }
 
 
